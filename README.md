@@ -10,7 +10,7 @@ encrypt/decrypt by AES256 algorithm
  > encrypt by AES256  
  > End point : POST \<url\>/Encryptor/encrypt   
  > Content-Type : application/x-www-form-urlencoded  
- > Field name : algorithm(fixed AES256) / encryptSrc 
+ > Field name : algorithm(fixed AES256) / encryptSrc   
  > decrypt by AES256  
  > End point : POST \<url\>/Encryptor/decrypt   
  > Content-Type : application/x-www-form-urlencoded  
