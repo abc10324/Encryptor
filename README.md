@@ -7,10 +7,10 @@ encrypt/decrypt by AES256 algorithm
  > Server: Tomcat v9.0  
 
 ## Function  
- > encrypt by AES256  
+ > encrypt by AES256/SHA256  
  > End point : POST \<url\>/Encryptor/encrypt   
  > Content-Type : application/x-www-form-urlencoded  
- > Field name : algorithm(fixed AES256) / encryptSrc   
+ > Field name : algorithm(fixed AES256/SHA256) / encryptSrc   
  > decrypt by AES256  
  > End point : POST \<url\>/Encryptor/decrypt   
  > Content-Type : application/x-www-form-urlencoded  

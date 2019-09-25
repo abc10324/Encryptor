@@ -6,12 +6,17 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AES {
-	private static String HASH_KEY = "12345678901234567890123456789012";
-	private static String HASH_IV = "1234567890123456";
+//	private static String HASH_KEY = "12345678901234567890123456789012";
+//	private static String HASH_IV = "1234567890123456";
+	@Value("${hash_key}")
+	private String HASH_KEY;
+	@Value("${hash_iv}")
+	private String HASH_IV;
 	private static String ALGORITHM = "AES/CBC/NoPadding";
 	
 //	public static void main(String[] args) {

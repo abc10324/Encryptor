@@ -45,3 +45,10 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
+war {
+    from('src/main/java') {
+        include '*.properties'
+        into('WEB-INF/classes')
+    }
+}
