@@ -1,5 +1,5 @@
 # Encryptor
-encrypt/decrypt by AES256 algorithm  
+encrypt/decrypt by AES256/SHA256/HMAC-SHA256 algorithm  
   
 ## Environment  
  > Project: Gradle  
@@ -14,7 +14,12 @@ encrypt/decrypt by AES256 algorithm
  > decrypt by AES256  
  > End point : POST \<url\>/Encryptor/decrypt   
  > Content-Type : application/x-www-form-urlencoded  
- > Field name : algorithm(fixed AES256) / decryptSrc 
+ > Field name : algorithm(fixed AES256) / decryptSrc  
+ > get and access by JWT  
+ > End point : POST \<url\>/Encryptor/Login  
+ > Field name : user / password
+ > End point : GET \<url\>/Encryptor/Access  
+ > Field name : jwt_token
  
 ## how to use gradleDeploy.bat and gradleDebugDeploy.bat  
  1.set environment variable TOMCAT_HOME to your tomcat install location (ex:D:\apache-tomcat-9.0.22)  
