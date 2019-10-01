@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +26,7 @@ public class CipherController {
 	@Autowired
 	private SHA sha;
 	@Autowired
+	@Qualifier("jwtOfficialImpl")
 	private JWT jwt;
 	
 	@PostMapping("/encrypt")
@@ -66,18 +67,17 @@ public class CipherController {
 	public Object getJwtToken(@RequestParam String user,@RequestParam String password) {
 			
 		if(StringUtils.hasText(user) && StringUtils.hasText(password)) {
-			JSONObject json = new JSONObject();
-			json.put("iss", user);
+			Map<String,Object> reqMap = new HashMap<String, Object>();
+			reqMap.put("iss", user);
 			
 			// 10 minutes expiration
-			json.put("exp", System.currentTimeMillis() + 1000 * 60 * 10);
-			System.out.println(json.toString());
+			reqMap.put("exp", System.currentTimeMillis() + 1000 * 60 * 10);
 			
-			String token = jwt.getJwtToken(json.toString());
+			String token = jwt.getJwtToken(reqMap);
 			
 			Map<String,Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("jwt_token", token);
-			resultMap.put("exp", json.getLong("exp"));
+			resultMap.put("exp", reqMap.get("exp"));
 			
 			return resultMap;
 		} else {
@@ -89,6 +89,7 @@ public class CipherController {
 	public Object accessByJwtToken(@RequestParam("jwt_token") String jwtToken) {
 		if(jwt.valid(jwtToken)) {
 			String user = (new JSONObject(jwt.getPayload(jwtToken))).getString("iss");
+			System.out.println(jwt.getHeader(jwtToken));
 			return Collections.singletonMap("result", "access success by user '" + user + "'");
 		}
 		
